@@ -33,69 +33,37 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
-      <div className="min-h-screen bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 relative overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-white opacity-10 rounded-full blur-3xl"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-white opacity-10 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white opacity-5 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="relative z-10 container mx-auto px-4 py-8">
-          <div className="calculator-container">
-            <div className="text-center mb-8">
-              <h1 className="calculator-title text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                🧮 Çok Fonksiyonlu Hesaplama Aracı
-              </h1>
-              
-              <p className="text-gray-600 text-lg mt-4 mb-8">
-                20 farklı hesaplama fonksiyonu ile ihtiyacınız olan tüm hesaplamaları yapın!
-              </p>
-
-              <div className="flex items-center justify-center space-x-4 mb-8">
-                <div className="flex items-center space-x-2">
-                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-sm text-gray-600">20 Hesaplama</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
-                  <span className="text-sm text-gray-600">Responsive</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <div className="w-3 h-3 bg-purple-500 rounded-full animate-pulse"></div>
-                  <span className="text-sm text-gray-600">Modern UI</span>
-                </div>
-              </div>
-            </div>
-            
-            <div className="nav-container">
-              <div className="nav-grid">
-                {calculators.map((calculator, index) => (
-                  <Link
-                    key={index}
-                    href={calculator.href}
-                    className={`nav-link group relative overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl bg-gradient-to-r ${calculator.color} border-0`}
-                  >
-                    <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                    <div className="relative z-10 flex flex-col items-center space-y-2">
-                      <span className="text-3xl group-hover:scale-110 transition-transform duration-300">
-                        {calculator.icon}
-                      </span>
-                      <span className="text-sm font-medium text-center leading-tight">
-                        {calculator.name}
-                      </span>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-            
-            <div className="text-center text-gray-500 text-sm mt-8 p-4 bg-white bg-opacity-10 rounded-lg backdrop-blur-sm">
-              <p className="mb-2">💡 İpucu: İstediğiniz hesaplama fonksiyonunu seçerek kullanmaya başlayın!</p>
-              <p className="text-xs opacity-75">Tüm hesaplamalar matematiksel doğruluk açısından test edilmiştir.</p>
-            </div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 animate-gradient-move">
+        <div className="relative z-10 w-full max-w-3xl mx-auto p-6 md:p-10 rounded-3xl shadow-2xl glass border border-white border-opacity-30 backdrop-blur-2xl animate-fadeInUp">
+          <div className="text-center mb-10">
+            <h1 className="text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent drop-shadow-lg animate-fadeInUp">
+              <span className="inline-block animate-float">🧮</span> Çok Fonksiyonlu Hesaplama Aracı
+            </h1>
           </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {calculators.map((calculator, index) => (
+              <Link
+                key={index}
+                href={calculator.href}
+                className={`group relative flex flex-col items-center justify-center p-6 rounded-2xl bg-white bg-opacity-60 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-white border-opacity-30 backdrop-blur-xl card-hover animate-fadeInUp`}
+                style={{ animationDelay: `${index * 0.05}s` }}
+              >
+                <span className="text-4xl md:text-5xl mb-2 group-hover:scale-125 transition-transform duration-300 animate-float">
+                  {calculator.icon}
+                </span>
+                <span className="text-base md:text-lg font-semibold text-center leading-tight text-gray-800 group-hover:text-indigo-600 transition-colors duration-300">
+                  {calculator.name}
+                </span>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 rounded-2xl bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400"></div>
+              </Link>
+            ))}
+          </div>
+        </div>
+        {/* Animated background blobs */}
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <div className="absolute -top-32 -left-32 w-96 h-96 bg-indigo-200 opacity-40 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-pink-200 opacity-40 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] bg-purple-200 opacity-30 rounded-full blur-3xl animate-float" style={{transform:'translate(-50%,-50%)'}}></div>
         </div>
       </div>
     </>

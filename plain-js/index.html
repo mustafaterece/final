@@ -4,324 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Çok Fonksiyonlu Hesaplama Aracı</title>
+    <link rel="stylesheet" href="../plain-html-app/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom CSS for Calculator App */
-        .calculator-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-        }
-
-        .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .nav-link {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-            border-radius: 15px;
-            color: white;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            min-height: 120px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-link:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .nav-link:hover::before {
-            opacity: 1;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e1e5e9;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .calculate-button {
-            width: 100%;
-            padding: 14px 24px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .calculate-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        .result-container {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            text-align: center;
-            font-size: 1.1rem;
-            font-weight: 600;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            margin-top: 1rem;
-        }
-
-        .calculator-title {
-            text-align: center;
-            color: #333;
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 2rem;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .back-link {
-            display: inline-block;
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            transition: color 0.3s ease;
-        }
-
-        .back-link:hover {
-            color: #5a6fd8;
-        }
-
-        /* Animated background */
         body {
-            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
+            background: linear-gradient(120deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            animation: gradientMove 15s ease infinite;
         }
-
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .calculator-container {
-                margin: 1rem;
-                padding: 1.5rem;
-            }
-            
-            .calculator-title {
-                font-size: 2rem;
-            }
-            
-            .nav-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            }
-        }
-
-        @media (max-width: 480px) {
-            .calculator-container {
-                margin: 0.5rem;
-                padding: 1rem;
-            }
-            
-            .nav-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Loading animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Success animation */
-        @keyframes success {
-            0% {
-                transform: scale(0.8);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .animate-success {
-            animation: success 0.5s ease-out;
-        }
-
-        /* Glass morphism effect */
         .glass {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255,255,255,0.6);
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.15);
+            backdrop-filter: blur(16px);
+            border-radius: 2rem;
+            border: 1px solid rgba(255,255,255,0.18);
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-fadeInUp {
+            animation: fadeInUp 0.7s cubic-bezier(.39,.575,.565,1) both;
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <div class="calculator-container">
-        <div id="main-content">
-            <a href="#" class="back-link" onclick="showMainMenu()">← Ana Sayfaya Dön</a>
-            <h1 class="calculator-title">🧮 Çok Fonksiyonlu Hesaplama Aracı</h1>
-            
-            <div class="nav-grid">
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" onclick="showCalculator('bmi')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">📊</span>
-                    BMI Hesaplama
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);" onclick="showCalculator('vat')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">💰</span>
-                    KDV Hesaplama
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #fc466b 0%, #3f5efb 100%);" onclick="showCalculator('interest')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">🏦</span>
-                    Faiz Hesaplama
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);" onclick="showCalculator('age')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">🎂</span>
-                    Yaş Hesaplama
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);" onclick="showCalculator('rectangle')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">📐</span>
-                    Dikdörtgen Alan/Çevre
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);" onclick="showCalculator('circle')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">⭕</span>
-                    Daire Alan/Çevre
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);" onclick="showCalculator('triangle')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">🔺</span>
-                    Üçgen Alan
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);" onclick="showCalculator('body-fat')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">💪</span>
-                    Vücut Yağ Oranı
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" onclick="showCalculator('iban')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">🏛️</span>
-                    IBAN Doğrulama
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showCalculator('installment')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">💳</span>
-                    Taksitli Ödeme
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showCalculator('percentage')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">📈</span>
-                    Yüzde Hesaplama
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);" onclick="showCalculator('average')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">📊</span>
-                    Ortalama Hesaplama
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);" onclick="showCalculator('grade-average')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">📚</span>
-                    Not Ortalaması
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);" onclick="showCalculator('raise')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">📈</span>
-                    Zam Hesaplama
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);" onclick="showCalculator('currency')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">💱</span>
-                    Döviz Çevirici
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);" onclick="showCalculator('time-converter')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">⏰</span>
-                    Saat/Dakika/Saniye
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" onclick="showCalculator('speed-time-distance')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">🚗</span>
-                    Hız/Zaman/Mesafe
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);" onclick="showCalculator('prime')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">🔢</span>
-                    Asal Sayı Kontrolü
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);" onclick="showCalculator('factorial')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">🧮</span>
-                    Faktöriyel Hesaplama
-                </a>
-                <a href="#" class="nav-link" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);" onclick="showCalculator('fibonacci')">
-                    <span style="font-size: 2rem; margin-bottom: 0.5rem;">🌀</span>
-                    Fibonacci Hesaplama
-                </a>
-            </div>
-            
-            <div style="text-align: center; color: #666; margin-top: 2rem;">
-                <p>💡 İpucu: İstediğiniz hesaplama fonksiyonunu seçerek kullanmaya başlayın!</p>
+    <div style="min-height:100vh; display:flex; align-items:center; justify-content:center; position:relative;">
+        <div class="glass calculator-container animate-fadeInUp" style="max-width:700px; width:100%; margin:2rem; padding:2.5rem 2rem;">
+            <h1 class="calculator-title" style="font-size:2.5rem; font-weight:900; background: linear-gradient(45deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 4px 16px rgba(102,126,234,0.2); text-align:center; margin-bottom:2.5rem;">
+                <span style="font-size:3rem; vertical-align:middle; animation: float 3s ease-in-out infinite; display:inline-block;">🧮</span> Çok Fonksiyonlu Hesaplama Aracı
+            </h1>
+            <div class="nav-grid" style="gap:1.5rem;">
+                <a href="bmi.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0s"><span style="font-size:2rem;">📊</span><span>BMI Hesaplama</span></a>
+                <a href="vat.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.05s"><span style="font-size:2rem;">💰</span><span>KDV Hesaplama</span></a>
+                <a href="interest.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.1s"><span style="font-size:2rem;">🏦</span><span>Faiz Hesaplama</span></a>
+                <a href="age.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.15s"><span style="font-size:2rem;">🎂</span><span>Yaş Hesaplama</span></a>
+                <a href="rectangle-area.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.2s"><span style="font-size:2rem;">📐</span><span>Dikdörtgen Alan/Çevre</span></a>
+                <a href="circle-area.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.25s"><span style="font-size:2rem;">⭕</span><span>Daire Alan/Çevre</span></a>
+                <a href="triangle-area.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.3s"><span style="font-size:2rem;">🔺</span><span>Üçgen Alan</span></a>
+                <a href="body-fat.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.35s"><span style="font-size:2rem;">💪</span><span>Vücut Yağ Oranı</span></a>
+                <a href="iban.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.4s"><span style="font-size:2rem;">🏛️</span><span>IBAN Doğrulama</span></a>
+                <a href="installment.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.45s"><span style="font-size:2rem;">💳</span><span>Taksitli Ödeme</span></a>
+                <a href="percentage.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.5s"><span style="font-size:2rem;">📈</span><span>Yüzde Hesaplama</span></a>
+                <a href="average.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.55s"><span style="font-size:2rem;">📊</span><span>Ortalama Hesaplama</span></a>
+                <a href="grade-average.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.6s"><span style="font-size:2rem;">📚</span><span>Not Ortalaması</span></a>
+                <a href="raise.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.65s"><span style="font-size:2rem;">📈</span><span>Zam Hesaplama</span></a>
+                <a href="currency.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.7s"><span style="font-size:2rem;">💱</span><span>Döviz Çevirici</span></a>
+                <a href="time-converter.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.75s"><span style="font-size:2rem;">⏰</span><span>Saat/Dakika/Saniye</span></a>
+                <a href="speed-time-distance.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.8s"><span style="font-size:2rem;">🚗</span><span>Hız/Zaman/Mesafe</span></a>
+                <a href="prime.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.85s"><span style="font-size:2rem;">🔢</span><span>Asal Sayı Kontrolü</span></a>
+                <a href="factorial.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.9s"><span style="font-size:2rem;">🧮</span><span>Faktöriyel Hesaplama</span></a>
+                <a href="fibonacci.html" class="nav-link card-hover animate-fadeInUp" style="animation-delay:0.95s"><span style="font-size:2rem;">🌈</span><span>Fibonacci Hesaplama</span></a>
             </div>
         </div>
-        
-        <div id="calculator-content" style="display: none;">
-            <!-- Calculator content will be loaded here -->
+        <!-- Animated background blobs -->
+        <div style="position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none;">
+            <div style="position:absolute; top:-80px; left:-80px; width:320px; height:320px; background:#c3cfe2; opacity:0.4; border-radius:50%; filter:blur(60px); animation: float 3s ease-in-out infinite;"></div>
+            <div style="position:absolute; bottom:-80px; right:-80px; width:320px; height:320px; background:#f5f7fa; opacity:0.4; border-radius:50%; filter:blur(60px); animation: float 3s ease-in-out infinite;"></div>
+            <div style="position:absolute; top:50%; left:50%; width:500px; height:500px; background:#e0e7ef; opacity:0.3; border-radius:50%; filter:blur(80px); transform:translate(-50%,-50%); animation: float 3s ease-in-out infinite;"></div>
         </div>
     </div>
-
-    <script src="calculator.js"></script>
 </body>
 </html> 
