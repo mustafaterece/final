@@ -41,11 +41,9 @@ cd nextjs-app
 npm install
 
 npm run dev
-```
 
-`http://localhost:3000` 
-
-cd plain-js
+Canlı link:
+https://final-gamma-silk.vercel.app/
 
 
 
