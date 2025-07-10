@@ -1,0 +1,197 @@
+<nav>
+  <a href="#" onclick="showSection('bmi')">BMI Hesaplama</a>
+  <a href="#" onclick="showSection('vat')">KDV Hesaplama</a>
+  <a href="#" onclick="showSection('interest')">Faiz Hesaplama</a>
+  <a href="#" onclick="showSection('age')">Yaş Hesaplama</a>
+  <a href="#" onclick="showSection('rectangle-area')">Dikdörtgen Alan/Çevre</a>
+  <a href="#" onclick="showSection('circle-area')">Daire Alan/Çevre</a>
+  <a href="#" onclick="showSection('triangle-area')">Üçgen Alan</a>
+  <a href="#" onclick="showSection('body-fat')">Vücut Yağ Oranı</a>
+  <a href="#" onclick="showSection('iban')">IBAN Doğrulama</a>
+  <a href="#" onclick="showSection('installment')">Taksitli Ödeme</a>
+  <a href="#" onclick="showSection('percentage')">Yüzde Hesaplama</a>
+  <a href="#" onclick="showSection('average')">Ortalama Hesaplama</a>
+  <a href="#" onclick="showSection('grade-average')">Not Ortalaması</a>
+  <a href="#" onclick="showSection('raise')">Zam Hesaplama</a>
+  <a href="#" onclick="showSection('currency')">Döviz Çevirici</a>
+  <a href="#" onclick="showSection('time-converter')">Saat/Dakika/Saniye</a>
+  <a href="#" onclick="showSection('speed-time-distance')">Hız/Zaman/Mesafe</a>
+  <a href="#" onclick="showSection('prime')">Asal Sayı Kontrolü</a>
+  <a href="#" onclick="showSection('factorial')">Faktöriyel Hesaplama</a>
+  <a href="#" onclick="showSection('fibonacci')">Fibonacci Hesaplama</a>
+  <!-- Diğer hesaplamalar -->
+</nav>
+<section id="bmi" style="display:none;">
+  <h1>BMI Hesaplama</h1>
+  <input type="number" id="height" placeholder="Boy (cm)">
+  <input type="number" id="weight" placeholder="Kilo (kg)">
+  <button onclick="calculateBMI()">Hesapla</button>
+  <div id="bmiResult"></div>
+</section>
+<section id="vat" style="display:none;">
+  <h1>KDV Hesaplama</h1>
+  <input type="number" id="vatAmount" placeholder="Tutar">
+  <input type="number" id="vatRate" placeholder="KDV Oranı (%)" value="18">
+  <button onclick="calculateVAT()">Hesapla</button>
+  <div id="vatResult"></div>
+</section>
+<section id="interest" style="display:none;">
+  <h1>Faiz Hesaplama</h1>
+  <input type="number" id="interestPrincipal" placeholder="Anapara">
+  <input type="number" id="interestRate" placeholder="Aylık Faiz Oranı (%)" value="1.5">
+  <input type="number" id="interestMonths" placeholder="Vade (Ay)" value="12">
+  <button onclick="calculateInterest()">Hesapla</button>
+  <div id="interestResult"></div>
+</section>
+<section id="age" style="display:none;">
+  <h1>Yaş Hesaplama</h1>
+  <input type="date" id="ageBirth">
+  <button onclick="calculateAge()">Hesapla</button>
+  <div id="ageResult"></div>
+</section>
+<section id="rectangle-area" style="display:none;">
+  <h1>Dikdörtgen Alan ve Çevre Hesaplama</h1>
+  <input type="number" id="rectShort" placeholder="Kısa Kenar">
+  <input type="number" id="rectLong" placeholder="Uzun Kenar">
+  <button onclick="calculateRectangleArea()">Hesapla</button>
+  <div id="rectResult"></div>
+</section>
+<section id="circle-area" style="display:none;">
+  <h1>Daire Alan ve Çevre Hesaplama</h1>
+  <input type="number" id="circleRadius" placeholder="Yarıçap">
+  <button onclick="calculateCircleArea()">Hesapla</button>
+  <div id="circleResult"></div>
+</section>
+<section id="triangle-area" style="display:none;">
+  <h1>Üçgen Alan Hesaplama</h1>
+  <input type="number" id="triangleBase" placeholder="Taban">
+  <input type="number" id="triangleHeight" placeholder="Yükseklik">
+  <button onclick="calculateTriangleArea()">Hesapla</button>
+  <div id="triangleResult"></div>
+</section>
+<section id="body-fat" style="display:none;">
+  <h1>Vücut Yağ Oranı Hesaplama</h1>
+  <select id="bodyFatGender">
+    <option value="male">Erkek</option>
+    <option value="female">Kadın</option>
+  </select>
+  <input type="number" id="bodyFatAge" placeholder="Yaş">
+  <input type="number" id="bodyFatHeight" placeholder="Boy (cm)">
+  <input type="number" id="bodyFatWeight" placeholder="Kilo (kg)">
+  <input type="number" id="bodyFatWaist" placeholder="Bel Çevresi (cm)">
+  <button onclick="calculateBodyFat()">Hesapla</button>
+  <div id="bodyFatResult"></div>
+</section>
+<section id="iban" style="display:none;">
+  <h1>IBAN Doğrulama</h1>
+  <input type="text" id="ibanInput" placeholder="IBAN">
+  <button onclick="checkIBAN()">Kontrol Et</button>
+  <div id="ibanResult"></div>
+</section>
+<section id="installment" style="display:none;">
+  <h1>Taksitli Ödeme Hesaplama</h1>
+  <input type="number" id="installmentPrincipal" placeholder="Anapara">
+  <input type="number" id="installmentRate" placeholder="Aylık Faiz Oranı (%)" value="1.5">
+  <input type="number" id="installmentMonths" placeholder="Taksit Sayısı" value="12">
+  <button onclick="calculateInstallment()">Hesapla</button>
+  <div id="installmentResult"></div>
+</section>
+<section id="percentage" style="display:none;">
+  <h1>Yüzde Hesaplama</h1>
+  <input type="number" id="percentageNumber" placeholder="Sayı">
+  <input type="number" id="percentagePercent" placeholder="Yüzde (%)">
+  <button onclick="calculatePercentage()">Hesapla</button>
+  <div id="percentageResult"></div>
+</section>
+<section id="average" style="display:none;">
+  <h1>Ortalama Hesaplama</h1>
+  <input type="text" id="averageNumbers" placeholder="Sayıları virgülle ayırarak girin (örn: 10, 20, 30)">
+  <button onclick="calculateAverage()">Hesapla</button>
+  <div id="averageResult"></div>
+</section>
+<section id="grade-average" style="display:none;">
+  <h1>Not Ortalaması Hesaplama</h1>
+  <input type="text" id="gradeAverageGrades" placeholder="Notları virgülle ayırarak girin (örn: 85, 90, 75)">
+  <input type="text" id="gradeAverageCredits" placeholder="Kredileri virgülle ayırarak girin (örn: 3, 4, 2)">
+  <button onclick="calculateGradeAverage()">Hesapla</button>
+  <div id="gradeAverageResult"></div>
+</section>
+<section id="raise" style="display:none;">
+  <h1>Zam Hesaplama</h1>
+  <input type="number" id="raiseCurrentSalary" placeholder="Mevcut Maaş">
+  <input type="number" id="raisePercent" placeholder="Zam Oranı (%)">
+  <button onclick="calculateRaise()">Hesapla</button>
+  <div id="raiseResult"></div>
+</section>
+<section id="currency" style="display:none;">
+  <h1>Döviz Çevirici</h1>
+  <input type="number" id="currencyAmount" placeholder="Miktar">
+  <select id="currencyFrom">
+    <option value="USD">USD</option>
+    <option value="EUR">EUR</option>
+    <option value="TRY">TRY</option>
+    <option value="GBP">GBP</option>
+  </select>
+  <select id="currencyTo">
+    <option value="EUR">EUR</option>
+    <option value="USD">USD</option>
+    <option value="TRY">TRY</option>
+    <option value="GBP">GBP</option>
+  </select>
+  <button onclick="convertCurrency()">Çevir</button>
+  <div id="currencyResult"></div>
+</section>
+<section id="time-converter" style="display:none;">
+  <h1>Saat/Dakika/Saniye Dönüştürücü</h1>
+  <input type="number" id="timeHours" placeholder="Saat">
+  <input type="number" id="timeMinutes" placeholder="Dakika">
+  <input type="number" id="timeSeconds" placeholder="Saniye">
+  <button onclick="convertTime()">Dönüştür</button>
+  <div id="timeResult"></div>
+</section>
+<section id="speed-time-distance" style="display:none;">
+  <h1>Hız/Zaman/Mesafe Hesaplama</h1>
+  <input type="number" id="speedTimeDistanceSpeed" placeholder="Hız (km/saat)">
+  <input type="number" id="speedTimeDistanceTime" placeholder="Zaman (saat)">
+  <input type="number" id="speedTimeDistanceDistance" placeholder="Mesafe (km)">
+  <button onclick="calculateSpeedTimeDistance()">Hesapla</button>
+  <div id="speedTimeDistanceResult"></div>
+</section>
+<section id="prime" style="display:none;">
+  <h1>Asal Sayı Kontrolü</h1>
+  <input type="number" id="primeNumber" placeholder="Sayı">
+  <button onclick="checkPrime()">Kontrol Et</button>
+  <div id="primeResult"></div>
+</section>
+<section id="factorial" style="display:none;">
+  <h1>Faktöriyel Hesaplama</h1>
+  <input type="number" id="factorialNumber" placeholder="Sayı">
+  <button onclick="calculateFactorial()">Hesapla</button>
+  <div id="factorialResult"></div>
+</section>
+<section id="fibonacci" style="display:none;">
+  <h1>Fibonacci Hesaplama</h1>
+  <input type="number" id="fibonacciNumber" placeholder="Kaç terim?">
+  <button onclick="calculateFibonacci()">Hesapla</button>
+  <div id="fibonacciResult"></div>
+</section>
+<script src="bmi.js"></script>
+<script src="vat.js"></script>
+<script src="interest.js"></script>
+<script src="age.js"></script>
+<script src="rectangle-area.js"></script>
+<script src="circle-area.js"></script>
+<script src="triangle-area.js"></script>
+<script src="body-fat.js"></script>
+<script src="iban.js"></script>
+<script src="installment.js"></script>
+<script src="percentage.js"></script>
+<script src="average.js"></script>
+<script src="grade-average.js"></script>
+<script src="raise.js"></script>
+<script src="currency.js"></script>
+<script src="time-converter.js"></script>
+<script src="speed-time-distance.js"></script>
+<script src="prime.js"></script>
+<script src="factorial.js"></script>
+<script src="fibonacci.js"></script> 
