@@ -205,3 +205,18 @@
     box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
   }
 } 
+
+/* Turkuaz ve uyumlu arka plan için eklemeler */
+body {
+  background-color: #ecfeff; /* Tailwind bg-cyan-50 karşılığı */
+}
+
+/* Scrollbar için de turkuaz uyumlu bir stil ekleyelim */
+::-webkit-scrollbar {
+  width: 8px;
+  background: #e0f7fa;
+}
+::-webkit-scrollbar-thumb {
+  background: #22d3ee;
+  border-radius: 4px;
+} 
