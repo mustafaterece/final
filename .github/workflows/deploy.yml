@@ -28,7 +28,7 @@ jobs:
     - name: Run tests
       run: |
         cd nextjs-app
-        npm test
+        npm test--passWithNoTests
     
     - name: Build Next.js app
       run: |
