@@ -42,4 +42,5 @@ npm install
 
 npm run dev
 
-Canlı link: https://final-gamma-silk.vercel.app/
+Canlı link: [https://final-gamma-silk.vercel.app/
+](https://final-blush-six.vercel.app/)
