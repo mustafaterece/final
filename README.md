@@ -43,7 +43,7 @@ npm install
 npm run dev
 
 Canlı link:
-[project-two-orcin.vercel.app](https://project-two-orcin.vercel.app/)
-
+[[project-two-orcin.vercel.app](https://project-two-orcin.vercel.app/)
+](https://final-gamma-silk.vercel.app/)
 
 
